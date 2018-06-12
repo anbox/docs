@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install Anbox &mdash; Anbox  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Welcome to Anbox’s documentation!" href="../index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Anbox
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Install Anbox</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-necessary-kernel-modules">Install necessary kernel modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-the-anbox-snap">Install the Anbox snap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#available-snap-channels">Available snap channels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#uninstall-anbox">Uninstall Anbox</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Anbox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Install Anbox</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/userguide/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-anbox">
+<h1>Install Anbox<a class="headerlink" href="#install-anbox" title="Permalink to this headline">¶</a></h1>
+<p>To install Anbox your system need to support <a class="reference external" href="https://snapcraft.io">snaps</a>. We
+do not officially support any other distribution method of Anbox at the moment
+but there are community made packages for various distributions (e.g. Arch Linux).
+However please keep in mind that the Anbox project can give not support them
+and its solely in the responsibility of the community packager to keep up with
+upstream development and update the packaging to any new changes. Please feel
+free to report still any bugs you encounter as they may not be related to the
+packaging.</p>
+<p>If you don’t know about snaps yet head over to <a class="reference external" href="https://snapcraft.io/">snapcraft.io</a>
+to get an introduction of what snaps are, how to install support for them on your
+distribution and how to use them.</p>
+<p>The installation of Anbox consists of two steps.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Install necessary kernel modules</li>
+<li>Install the Anbox snap</li>
+</ol>
+</div></blockquote>
+<p>In order to support the mandatory kernel subsystems ashmem and binder for the
+Android container you have to install two
+<a class="reference external" href="https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support">DKMS</a>
+based kernel modules. The source for the kernel modules is maintained by the
+Anbox project <a class="reference external" href="https://github.com/anbox/anbox/tree/master/kernel">here</a>.</p>
+<p>At the moment we only have packages prepared for Ubuntu in a PPA on Launchpad.
+If you want to help to get the packages in your favorite distribution please
+come and talk to us or submit a PR with the distribution specific packaging.</p>
+<p>The second step will install the Anbox snap from the store and will give you
+everything you need to run the full Anbox experience.</p>
+<div class="section" id="install-necessary-kernel-modules">
+<h2>Install necessary kernel modules<a class="headerlink" href="#install-necessary-kernel-modules" title="Permalink to this headline">¶</a></h2>
+<p>In order to add the PPA to your Ubuntu system please run the following commands:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository ppa:morphis/anbox-support
+$ sudo apt update
+$ sudo apt install anbox-modules-dkms
+</pre></div>
+</div>
+<p>These will add the PPA to your system and install the <cite>anbox-modules-dkms</cite>
+package which contains the ashmem and binder kernel modules. They will be
+automatically rebuild everytime the kernel packages on your system update.</p>
+<p>After you installed the <cite>anbox-modules-dkms</cite> package you have to manually
+load the kernel modules. The next time your system starts they will be
+automatically loaded.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo modprobe ashmem_linux
+$ sudo modprobe binder_linux
+</pre></div>
+</div>
+<p>Now you should have two new nodes in your systems <cite>/dev</cite> directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ ls -1 /dev/{ashmem,binder}
+/dev/ashmem
+/dev/binder
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-the-anbox-snap">
+<h2>Install the Anbox snap<a class="headerlink" href="#install-the-anbox-snap" title="Permalink to this headline">¶</a></h2>
+<p>Installing the Anbox snap is very simple:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap install --devmode --beta anbox
+</pre></div>
+</div>
+<p>If you didn’t logged into the Ubuntu Store yet, the <cite>snap</cite> command will
+ask you to use <cite>sudo snap …</cite> in order to install the snap:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo snap install --devmode --beta anbox
+</pre></div>
+</div>
+<p>At the moment we require the use of <cite>–devmode</cite> as the Anbox snap is not
+yet fully confined. Work has started with the upstream <cite>snapd</cite> project to
+get support for full confinement.</p>
+<p>As a side effect of using <cite>–devmode</cite> the snap will not automatically update.
+In order to update to a newer version you can run:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap refresh --beta --devmode anbox
+</pre></div>
+</div>
+<p>Information about the currently available versions of the snap is available
+via:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap info anbox
+</pre></div>
+</div>
+</div>
+<div class="section" id="available-snap-channels">
+<h2>Available snap channels<a class="headerlink" href="#available-snap-channels" title="Permalink to this headline">¶</a></h2>
+<p>Currently we only use the beta and edge channels for the Anbox snap. The edge
+channel tracks the latest development is always synced with the state of the
+master branch on github. The beta channel is updated less frequently to provide
+a more stable and bug free experience.</p>
+<p>Once proper confinement for the Anbox snap exists we will also start using the
+candidate and stable channels.</p>
+</div>
+</div>
+<div class="section" id="uninstall-anbox">
+<h1>Uninstall Anbox<a class="headerlink" href="#uninstall-anbox" title="Permalink to this headline">¶</a></h1>
+<p>If you want to remove Anbox from your system you first have to remove the snap:</p>
+<p><strong>NOTE:</strong> By removing the snap you remove all data you stored within the snap
+from your system. There is no way to bring it back.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap remove anbox
+</pre></div>
+</div>
+<p>Once the snap is removed you have to remove the installed kernel modules as well:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo apt install ppa-purge
+$ sudo ppa-purge ppa:morphis/anbox-support
+</pre></div>
+</div>
+<p>Once done Anbox is removed from your system.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="Welcome to Anbox’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anbox Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
