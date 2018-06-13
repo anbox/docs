@@ -1,7 +1,7 @@
 Welcome to Anbox's documentation!
 =================================
 
-Welcome to the official documentation of the UBports project!
+This is the official documentation of the `Anbox <https://anbox.io>`_ project.
 
 .. toctree::
    :maxdepth: 1
