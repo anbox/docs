@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Android rootfs overlay &mdash; Anbox  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Runtime setup" href="../../architecture/runtime_setup.html" />
+    <link rel="prev" title="Advanced use" href="index.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Anbox
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install Anbox</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-necessary-kernel-modules">Install necessary kernel modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-the-anbox-snap">Install the Anbox snap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#available-snap-channels">Available snap channels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html#uninstall-anbox">Uninstall Anbox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Advanced use</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Android rootfs overlay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enable-android-rootfs-overlay">Enable Android rootfs overlay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extend-android-rootfs-with-additional-files">Extend Android rootfs with additional files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture/runtime_setup.html">Runtime setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../architecture/runtime_setup.html#application-mapping">Application Mapping</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Contribute</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/bug_report.html">Bug reporting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/bug_report.html#check-if-the-bug-is-already-reported">Check if the bug is already reported</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/bug_report.html#update-to-the-latest-version-of-anbox">Update to the latest version of Anbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/bug_report.html#collect-all-necessary-information-for-the-bug-report">Collect all necessary information for the bug report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribute/bug_report.html#create-the-bug-report">Create the bug report</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Anbox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Advanced use</a> &raquo;</li>
+        
+      <li>Android rootfs overlay</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/userguide/advanced/rootfs_overlay.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="android-rootfs-overlay">
+<h1>Android rootfs overlay<a class="headerlink" href="#android-rootfs-overlay" title="Permalink to this headline">¶</a></h1>
+<p>Anbox provides support to allow customizing the used Android root filesystem. This
+is useful for development and debugging purposes but also to add additional functionality
+to the Android root filesystem Anbox ships by default.</p>
+<p>Overlaying the default Android filesystem is a powerful feature but needs to be used
+carefully as it may introduce bugs and unwanted behavior if used incorrectly.</p>
+<p>The following steps will provide an overview of the basic steps to setup the rootfs
+overlay (which is disabled by default) and how to use it.</p>
+<div class="section" id="enable-android-rootfs-overlay">
+<h2>Enable Android rootfs overlay<a class="headerlink" href="#enable-android-rootfs-overlay" title="Permalink to this headline">¶</a></h2>
+<p>The rootfs overlay support is hidden behind a configuration option of the snap. You
+enable it by running the following commands:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap set anbox rootfs-overlay.enable=true
+$ snap restart anbox.container-manager
+</pre></div>
+</div>
+<p>Now the container manager is running and the overlayed rootfs exists within the snap
+mount namespace at <cite>/var/snap/anbox/common/combined-rootfs</cite>. To verify everything
+is setup correctly you can inspect the <cite>combined-rootfs</cite> this way:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo snap run --shell anbox.container-manager
+# ls -alh /var/snap/anbox/common/combined-rootfs
+</pre></div>
+</div>
+</div>
+<div class="section" id="extend-android-rootfs-with-additional-files">
+<h2>Extend Android rootfs with additional files<a class="headerlink" href="#extend-android-rootfs-with-additional-files" title="Permalink to this headline">¶</a></h2>
+<p>Now that the overlay is setup you can start using it. For that you can put any files
+into the directory <cite>/var/snap/anbox/common/rootfs-overlay</cite> and they will show up in
+the Android root filesystem used by Anbox.</p>
+<p>Once you placed files inside the overlay directory you have to ensure all files have
+the right uid/gid assigned. Anbox uses a user namespace where all uid/gid are shifted
+to the unprivileged base UID <cite>100000</cite>. This means that UID <cite>100000</cite> on your host system
+will be UID <cite>0</cite> inside the Android container.</p>
+<p>The most common case is that all files need to be owned by root inside the Android container.
+For that you can simply recursively change the UID/GID of all files in the overlay directory
+with the following command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo chown -R 100000:100000 /var/snap/anbox/common/rootfs-overlay
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../architecture/runtime_setup.html" class="btn btn-neutral float-right" title="Runtime setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Advanced use" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Anbox Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
