@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Runtime setup &mdash; Anbox  documentation</title>
+  <title>Install applications &mdash; Anbox  documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Bug reporting" href="../contribute/bug_report.html" />
-    <link rel="prev" title="Android rootfs overlay" href="../userguide/advanced/rootfs_overlay.html" /> 
+    <link rel="next" title="Advanced use" href="advanced/index.html" />
+    <link rel="prev" title="Install Anbox" href="install.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -82,28 +82,28 @@
             
             
               <p class="caption"><span class="caption-text">User Guide</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../userguide/install.html">Install Anbox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../userguide/install.html#install-necessary-kernel-modules">Install necessary kernel modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../userguide/install.html#install-the-anbox-snap">Install the Anbox snap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../userguide/install.html#available-snap-channels">Available snap channels</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install Anbox</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install-necessary-kernel-modules">Install necessary kernel modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install-the-anbox-snap">Install the Anbox snap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#available-snap-channels">Available snap channels</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../userguide/install.html#uninstall-anbox">Uninstall Anbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../userguide/install_apps.html">Install applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../userguide/advanced/index.html">Advanced use</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../userguide/advanced/rootfs_overlay.html">Android rootfs overlay</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../userguide/advanced/rootfs_overlay.html#enable-android-rootfs-overlay">Enable Android rootfs overlay</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../userguide/advanced/rootfs_overlay.html#extend-android-rootfs-with-additional-files">Extend Android rootfs with additional files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html#uninstall-anbox">Uninstall Anbox</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Install applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/index.html">Advanced use</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/rootfs_overlay.html">Android rootfs overlay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="advanced/rootfs_overlay.html#enable-android-rootfs-overlay">Enable Android rootfs overlay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced/rootfs_overlay.html#extend-android-rootfs-with-additional-files">Extend Android rootfs with additional files</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">Architecture</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Runtime setup</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#application-mapping">Application Mapping</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/runtime_setup.html">Runtime setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../architecture/runtime_setup.html#application-mapping">Application Mapping</a></li>
 </ul>
 </li>
 </ul>
@@ -161,13 +161,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Runtime setup</li>
+      <li>Install applications</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/architecture/runtime_setup.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/userguide/install_apps.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -180,42 +180,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="runtime-setup">
-<h1>Runtime setup<a class="headerlink" href="#runtime-setup" title="Permalink to this headline">¶</a></h1>
-<p>The Anbox runtime consists mainly of two separate instances:</p>
-<blockquote>
-<div><ul class="simple">
-<li>container manager</li>
-<li>session manager</li>
-</ul>
-</div></blockquote>
-<p>The container manager has the job of managing the container setup and maintenance
-during its lifetime. It has the responsibility to start the LXC environment we’re
-using to run the Android system.</p>
-<p>The session manager runs inside the session of a user logged into the Linux system.
-It will communicate over several sockets with the Android instance running inside
-the container and provide integration with the Linux system. It also acts as a
-multiplexer to map Android applications into single windows on the desktop
-environment. Currently all application windows are owned by the same process
-(the session manager). The application logic itself is still in a separate process
-inside the Android container.</p>
-<p>The following picture shows an overview over the architecture:</p>
-<img alt="../_images/architecture.png" src="../_images/architecture.png" />
-<div class="section" id="application-mapping">
-<h2>Application Mapping<a class="headerlink" href="#application-mapping" title="Permalink to this headline">¶</a></h2>
-<p>Android applications are mapped into single windows within the desktop environment.
-This is achieved by plugging into the Android hwcomposer HAL module which receives
-a set of layers to composite on a screen. Anbox tells SurfaceFlinger through its
-hwcomposer implementation to get a layer for each application and combines this with
-additional information it receives from the Android WindowManager to map individual
-layers to applications. For more details please look into the implementation at</p>
-<blockquote>
-<div><ul class="simple">
-<li>android/hwcomposer</li>
-<li>src/anbox/graphics/layer_composer.cpp</li>
-<li>src/anbox/wm/manager.cpp</li>
-</ul>
-</div></blockquote>
+  <div class="section" id="install-applications">
+<h1>Install applications<a class="headerlink" href="#install-applications" title="Permalink to this headline">¶</a></h1>
+<p>Installation applications into the Android container provided by Anbox
+we currently use the sideloading functionality Android provides. For
+this you need to have the Android Debug Bridge (ADB) installed on your
+host system. See the <a class="reference external" href="https://developer.android.com/studio/command-line/adb">Android documentation</a>
+for details.</p>
+<p>If you’re running Ubuntu or Fedora you can install ADB from the package archive:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># On Ubuntu
+$ sudo apt install android-tools-adb
+
+# On Fedora
+$ sudo dnf install android-tools
+</pre></div>
+</div>
+<p>Once ADB is installed you’re ready to install Android applications.</p>
+<p>Anbox does not provide any functionality to retrieve Android applications.
+You need to get them from a source on the internet. Once you have the APK
+package for the application you can install it into the Android container
+with the following command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ adb install my-app.apk
+</pre></div>
+</div>
+<p>If the Anbox container is not running yet you can start it with loading
+the application manager application:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ anbox.appmgr
+</pre></div>
 </div>
 </div>
 
@@ -227,10 +218,10 @@ layers to applications. For more details please look into the implementation at<
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../contribute/bug_report.html" class="btn btn-neutral float-right" title="Bug reporting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="advanced/index.html" class="btn btn-neutral float-right" title="Advanced use" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../userguide/advanced/rootfs_overlay.html" class="btn btn-neutral" title="Android rootfs overlay" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral" title="Install Anbox" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
