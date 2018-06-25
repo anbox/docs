@@ -9,6 +9,7 @@ This is the official documentation of the `Anbox <https://anbox.io>`_ project.
    :name: sec-userguide
 
    userguide/install
+   userguide/install_apps
    userguide/advanced/index
 
 .. toctree::
