@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Advanced use &mdash; Anbox  documentation</title>
+  <title>Software Rendering &mdash; Anbox  documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Android rootfs overlay" href="rootfs_overlay.html" />
-    <link rel="prev" title="Install applications" href="../install_apps.html" /> 
+    <link rel="next" title="Runtime setup" href="../../architecture/runtime_setup.html" />
+    <link rel="prev" title="Android rootfs overlay" href="rootfs_overlay.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -91,13 +91,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html#uninstall-anbox">Uninstall Anbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install_apps.html">Install applications</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced use</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Advanced use</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="rootfs_overlay.html">Android rootfs overlay</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="rootfs_overlay.html#enable-android-rootfs-overlay">Enable Android rootfs overlay</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rootfs_overlay.html#extend-android-rootfs-with-additional-files">Extend Android rootfs with additional files</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="software_rendering.html">Software Rendering</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Software Rendering</a></li>
 </ul>
 </li>
 </ul>
@@ -162,13 +162,15 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Advanced use</li>
+          <li><a href="index.html">Advanced use</a> &raquo;</li>
+        
+      <li>Software Rendering</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/userguide/advanced/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/userguide/advanced/software_rendering.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -181,14 +183,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="advanced-use">
-<h1>Advanced use<a class="headerlink" href="#advanced-use" title="Permalink to this headline">¶</a></h1>
-<p>This section of the documentation details advanced tasks that power users may want to perform on their Ubuntu Touch device.</p>
-<div class="toctree-wrapper compound" id="toc-userguide-advanced">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="rootfs_overlay.html">Android rootfs overlay</a></li>
-<li class="toctree-l1"><a class="reference internal" href="software_rendering.html">Software Rendering</a></li>
-</ul>
+  <div class="section" id="software-rendering">
+<h1>Software Rendering<a class="headerlink" href="#software-rendering" title="Permalink to this headline">¶</a></h1>
+<p>In some use cases (e.g. VirtualBox) it can be helpful to run Anbox with
+software rendering rather than with the EGL/GL driver provided by the host
+operating system. Anbox includes <a class="reference external" href="https://swiftshader.googlesource.com/SwiftShader/">Swiftshader</a>
+for this which provides a high-performance CPU based implementation of
+OpenGL ES and EGL.</p>
+<p><strong>NOTE:</strong> You need at least revision <em>114</em> of the Anbox snap for this.</p>
+<p>To enable software rendering in Anbox the only thing you have to do is</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap set anbox software-rendering.enable=true
+$ snap restart anbox.container-manager
+</pre></div>
+</div>
+<p><strong>BUT</strong> this will stop any running Anbox process. You have to start Anbox
+again afterwards.</p>
+<p>Afterwards Anbox will use software rendering. If you want to disable software
+rendering it’s as simple as</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap set anbox software-rendering.enable=false
+$ snap restart anbox.container-manager
+</pre></div>
 </div>
 </div>
 
@@ -200,10 +214,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="rootfs_overlay.html" class="btn btn-neutral float-right" title="Android rootfs overlay" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../architecture/runtime_setup.html" class="btn btn-neutral float-right" title="Runtime setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../install_apps.html" class="btn btn-neutral" title="Install applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="rootfs_overlay.html" class="btn btn-neutral" title="Android rootfs overlay" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
