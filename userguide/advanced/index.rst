@@ -8,3 +8,4 @@ This section of the documentation details advanced tasks that power users may wa
     :name: toc-userguide-advanced
     
     rootfs_overlay
+    software_rendering
