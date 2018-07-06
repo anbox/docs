@@ -19,50 +19,10 @@ The installation of Anbox consists of two steps.
  1. Install necessary kernel modules
  2. Install the Anbox snap
 
-In order to support the mandatory kernel subsystems ashmem and binder for the
-Android container you have to install two
-`DKMS <https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support>`_
-based kernel modules. The source for the kernel modules is maintained by the
-Anbox project `here <https://github.com/anbox/anbox/tree/master/kernel>`_.
-
-At the moment we only have packages prepared for Ubuntu in a PPA on Launchpad.
-If you want to help to get the packages in your favorite distribution please
-come and talk to us or submit a PR with the distribution specific packaging.
+To install the necessary kernel modules, please read :doc:`install_kernel_modules`.
 
 The second step will install the Anbox snap from the store and will give you
 everything you need to run the full Anbox experience.
-
-Install necessary kernel modules
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-In order to add the PPA to your Ubuntu system please run the following commands:
-
-.. code-block:: text
-
-    $ sudo add-apt-repository ppa:morphis/anbox-support
-    $ sudo apt update
-    $ sudo apt install linux-headers-generic anbox-modules-dkms
-
-These will add the PPA to your system and install the `anbox-modules-dkms`
-package which contains the ashmem and binder kernel modules. They will be
-automatically rebuild everytime the kernel packages on your system update.
-
-After you installed the `anbox-modules-dkms` package you have to manually
-load the kernel modules. The next time your system starts they will be
-automatically loaded.
-
-.. code-block:: text
-
-    $ sudo modprobe ashmem_linux
-    $ sudo modprobe binder_linux
-
-Now you should have two new nodes in your systems `/dev` directory:
-
-.. code-block:: text
-
-    $ ls -1 /dev/{ashmem,binder}
-    /dev/ashmem
-    /dev/binder
 
 
 Install the Anbox snap
