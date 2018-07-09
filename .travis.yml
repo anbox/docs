@@ -1,0 +1,18 @@
+language: python
+cache: pip
+
+install:
+    pip install sphinx sphinx_rtd_theme
+
+script:
+    make html
+
+deploy:
+    provider: pages
+    local-dir: build/html/
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+    keep-history: true
+    fqdn: docs.anbox.io
+    on:
+        branch: master
