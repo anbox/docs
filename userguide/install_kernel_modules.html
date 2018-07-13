@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Install applications &mdash; Anbox  documentation</title>
+  <title>Install Kernel Modules &mdash; Anbox  documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Advanced use" href="advanced/index.html" />
-    <link rel="prev" title="Install Kernel Modules" href="install_kernel_modules.html" /> 
+    <link rel="next" title="Install applications" href="install_apps.html" />
+    <link rel="prev" title="Install Anbox" href="install.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,15 +89,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="install.html#uninstall-anbox">Uninstall Anbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install_kernel_modules.html">Install Kernel Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install_kernel_modules.html#install-with-dkms">Install with DKMS</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="install_kernel_modules.html#install-dkms-package-from-ppa">Install DKMS package from PPA</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Install Kernel Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-with-dkms">Install with DKMS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-dkms-package-from-ppa">Install DKMS package from PPA</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="install_kernel_modules.html#install-with-in-tree-modules">Install with in-tree modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-with-in-tree-modules">Install with in-tree modules</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Install applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_apps.html">Install applications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced/index.html">Advanced use</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="advanced/rootfs_overlay.html">Android rootfs overlay</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="advanced/rootfs_overlay.html#enable-android-rootfs-overlay">Enable Android rootfs overlay</a></li>
@@ -177,13 +177,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Install applications</li>
+      <li>Install Kernel Modules</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/userguide/install_apps.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/userguide/install_kernel_modules.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -196,33 +196,69 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="install-applications">
-<h1>Install applications<a class="headerlink" href="#install-applications" title="Permalink to this headline">¶</a></h1>
-<p>Installation applications into the Android container provided by Anbox
-we currently use the sideloading functionality Android provides. For
-this you need to have the Android Debug Bridge (ADB) installed on your
-host system. See the <a class="reference external" href="https://developer.android.com/studio/command-line/adb">Android documentation</a>
-for details.</p>
-<p>If you’re running Ubuntu or Fedora you can install ADB from the package archive:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># On Ubuntu
-$ sudo apt install android-tools-adb
-
-# On Fedora
-$ sudo dnf install android-tools
+  <div class="section" id="install-kernel-modules">
+<h1>Install Kernel Modules<a class="headerlink" href="#install-kernel-modules" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-with-dkms">
+<h2>Install with DKMS<a class="headerlink" href="#install-with-dkms" title="Permalink to this headline">¶</a></h2>
+<p>In order to support the mandatory kernel subsystems ashmem and binder for the
+Android container you have to install two
+<a class="reference external" href="https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support">DKMS</a>
+based kernel modules. The source for the kernel modules is maintained by the
+Anbox project <a class="reference external" href="https://github.com/anbox/anbox-modules">here</a>.</p>
+<p>At the moment we only have packages prepared for Ubuntu in a PPA on Launchpad.
+If you want to help to get the packages in your favorite distribution please
+come and <a class="reference internal" href="../community/channels.html"><span class="doc">talk to us</span></a> or submit a PR with the distribution
+specific packaging.</p>
+<div class="section" id="install-dkms-package-from-ppa">
+<h3>Install DKMS package from PPA<a class="headerlink" href="#install-dkms-package-from-ppa" title="Permalink to this headline">¶</a></h3>
+<p>In order to add the PPA to your Ubuntu system please run the following commands:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository ppa:morphis/anbox-support
+$ sudo apt update
+$ sudo apt install linux-headers-generic anbox-modules-dkms
 </pre></div>
 </div>
-<p>Once ADB is installed you’re ready to install Android applications.</p>
-<p>Anbox does not provide any functionality to retrieve Android applications.
-You need to get them from a source on the internet. Once you have the APK
-package for the application you can install it into the Android container
-with the following command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ adb install my-app.apk
+<p>These will add the PPA to your system and install the <cite>anbox-modules-dkms</cite>
+package which contains the ashmem and binder kernel modules. They will be
+automatically rebuild every time the kernel packages on your system update.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please install the corresponding header package for your running kernel, if
+you’re not using the default one.</p>
+</div>
+<p>After you installed the <cite>anbox-modules-dkms</cite> package you have to manually
+load the kernel modules. The next time your system starts they will be
+automatically loaded.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo modprobe ashmem_linux
+$ sudo modprobe binder_linux
 </pre></div>
 </div>
-<p>If the Anbox container is not running yet you can start it with loading
-the application manager application:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ anbox.appmgr
+<p>Now you should have two new nodes in your systems <cite>/dev</cite> directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ ls -1 /dev/{ashmem,binder}
+/dev/ashmem
+/dev/binder
 </pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="install-with-in-tree-modules">
+<h2>Install with in-tree modules<a class="headerlink" href="#install-with-in-tree-modules" title="Permalink to this headline">¶</a></h2>
+<p>Android ashmem and binder modules are in linux kernel tree. So it’s possible to
+build them as in-tree modules.</p>
+<p>You can enable them, by looking at the following configuration,</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/torvalds/linux/blob/master/drivers/android/Kconfig">https://github.com/torvalds/linux/blob/master/drivers/android/Kconfig</a></li>
+<li><a class="reference external" href="https://github.com/torvalds/linux/blob/master/drivers/staging/android/Kconfig">https://github.com/torvalds/linux/blob/master/drivers/staging/android/Kconfig</a></li>
+</ul>
+<p>However if you don’t want these modules to be built-in for your kernel, you can apply
+the following patches, to build them as modules.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://salsa.debian.org/kernel-team/linux/blob/master/debian/patches/debian/android-enable-building-ashmem-and-binder-as-modules.patch">https://salsa.debian.org/kernel-team/linux/blob/master/debian/patches/debian/android-enable-building-ashmem-and-binder-as-modules.patch</a></li>
+<li><a class="reference external" href="https://salsa.debian.org/kernel-team/linux/blob/master/debian/patches/debian/export-symbols-needed-by-android-drivers.patch">https://salsa.debian.org/kernel-team/linux/blob/master/debian/patches/debian/export-symbols-needed-by-android-drivers.patch</a></li>
+</ul>
+<p>Debian has enabled these modules since kernel 4.17.3. So you don’t need to bother
+how to install. Currently kernel 4.17.3 and above are only available in
+Debian <a class="reference external" href="https://packages.debian.org/sid/linux-image-4.17.0-1-amd64">Unstable</a>.</p>
+<p>Other distributions are welcome to take these patches and enable them by default.</p>
 </div>
 </div>
 
@@ -234,10 +270,10 @@ the application manager application:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="advanced/index.html" class="btn btn-neutral float-right" title="Advanced use" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="install_apps.html" class="btn btn-neutral float-right" title="Install applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="install_kernel_modules.html" class="btn btn-neutral" title="Install Kernel Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral" title="Install Anbox" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
