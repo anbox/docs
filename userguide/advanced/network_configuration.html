@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Android rootfs overlay &mdash; Anbox  documentation</title>
+  <title>Network Configuration &mdash; Anbox  documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Software Rendering" href="software_rendering.html" />
-    <link rel="prev" title="Advanced use" href="index.html" /> 
+    <link rel="next" title="Runtime setup" href="../../architecture/runtime_setup.html" />
+    <link rel="prev" title="Software Rendering" href="software_rendering.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -99,15 +99,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../install_apps.html">Install applications</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Advanced use</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Android rootfs overlay</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#enable-android-rootfs-overlay">Enable Android rootfs overlay</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#extend-android-rootfs-with-additional-files">Extend Android rootfs with additional files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rootfs_overlay.html">Android rootfs overlay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rootfs_overlay.html#enable-android-rootfs-overlay">Enable Android rootfs overlay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rootfs_overlay.html#extend-android-rootfs-with-additional-files">Extend Android rootfs with additional files</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="software_rendering.html">Software Rendering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="network_configuration.html">Network Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="network_configuration.html#network-bridge">Network bridge</a></li>
-<li class="toctree-l3"><a class="reference internal" href="network_configuration.html#container-network-configuration">Container network configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Network Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#network-bridge">Network bridge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#container-network-configuration">Container network configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -184,13 +184,13 @@
         
           <li><a href="index.html">Advanced use</a> &raquo;</li>
         
-      <li>Android rootfs overlay</li>
+      <li>Network Configuration</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/userguide/advanced/rootfs_overlay.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/userguide/advanced/network_configuration.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -203,44 +203,54 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="android-rootfs-overlay">
-<h1>Android rootfs overlay<a class="headerlink" href="#android-rootfs-overlay" title="Permalink to this headline">¶</a></h1>
-<p>Anbox provides support to allow customizing the used Android root filesystem. This
-is useful for development and debugging purposes but also to add additional functionality
-to the Android root filesystem Anbox ships by default.</p>
-<p>Overlaying the default Android filesystem is a powerful feature but needs to be used
-carefully as it may introduce bugs and unwanted behavior if used incorrectly.</p>
-<p>The following steps will provide an overview of the basic steps to setup the rootfs
-overlay (which is disabled by default) and how to use it.</p>
-<div class="section" id="enable-android-rootfs-overlay">
-<h2>Enable Android rootfs overlay<a class="headerlink" href="#enable-android-rootfs-overlay" title="Permalink to this headline">¶</a></h2>
-<p>The rootfs overlay support is hidden behind a configuration option of the snap. You
-enable it by running the following commands:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap set anbox rootfs-overlay.enable=true
-$ snap restart anbox.container-manager
+  <div class="section" id="network-configuration">
+<h1>Network Configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Anbox provides configuration options to change the network configuration of the
+Android container and the network bridge used to let the container talk to networks
+the host is connected to.</p>
+<div class="section" id="network-bridge">
+<h2>Network bridge<a class="headerlink" href="#network-bridge" title="Permalink to this headline">¶</a></h2>
+<p>By default anbox creates a network bridge called <cite>anbox0</cite>
+which will forward traffic from the Android container to the network the machine
+Anbox is running on is connected to.</p>
+<p>The default configuration of the bridge looks like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>anbox0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+    inet 192.168.250.1  netmask 255.255.255.0  broadcast 0.0.0.0
+    inet6 fe80::743a:9ff:fefd:96ac  prefixlen 64  scopeid 0x20&lt;link&gt;
+    ether 76:3a:09:fd:96:ac  txqueuelen 1000  (Ethernet)
+    RX packets 0  bytes 0 (0.0 B)
+    RX errors 0  dropped 0  overruns 0  frame 0
+    TX packets 113  bytes 17698 (17.6 KB)
+    TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 </pre></div>
 </div>
-<p>Now the container manager is running and the overlayed rootfs exists within the snap
-mount namespace at <cite>/var/snap/anbox/common/combined-rootfs</cite>. To verify everything
-is setup correctly you can inspect the <cite>combined-rootfs</cite> this way:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo snap run --shell anbox.container-manager
-# ls -alh /var/snap/anbox/common/combined-rootfs
+<p>To change the configuration of the bridge the following configuration options exists
+on the snap:</p>
+<ul class="simple">
+<li><cite>bridge.address</cite>: Address of the bridge (default: <cite>192.168.250.1</cite>)</li>
+<li><cite>bridge.netmask</cite>: Netmask of the bridge (default: <cite>255.255.255.0</cite>)</li>
+<li><cite>bridge.network</cite>: Network used by bridge (default: <cite>192.168.250.1/24</cite>)</li>
+<li><cite>bridge.nat.enable</cite>: Enable or disable NAT support on the bridge (default: <cite>true</cite>)</li>
+</ul>
+<p>The values of the configuration items are not validated. If incorrect values are
+supplied the bridge may get incorrectly configured and the container wont be able
+to access any outside network or will fail to start.</p>
+<p>All configuration items can be changed with the <cite>snap</cite> command. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap set anbox bridge.address=192.168.250.2
 </pre></div>
 </div>
 </div>
-<div class="section" id="extend-android-rootfs-with-additional-files">
-<h2>Extend Android rootfs with additional files<a class="headerlink" href="#extend-android-rootfs-with-additional-files" title="Permalink to this headline">¶</a></h2>
-<p>Now that the overlay is setup you can start using it. For that you can put any files
-into the directory <cite>/var/snap/anbox/common/rootfs-overlay</cite> and they will show up in
-the Android root filesystem used by Anbox.</p>
-<p>Once you placed files inside the overlay directory you have to ensure all files have
-the right uid/gid assigned. Anbox uses a user namespace where all uid/gid are shifted
-to the unprivileged base UID <cite>100000</cite>. This means that UID <cite>100000</cite> on your host system
-will be UID <cite>0</cite> inside the Android container.</p>
-<p>The most common case is that all files need to be owned by root inside the Android container.
-For that you can simply recursively change the UID/GID of all files in the overlay directory
-with the following command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo chown -R 100000:100000 /var/snap/anbox/common/rootfs-overlay
+<div class="section" id="container-network-configuration">
+<h2>Container network configuration<a class="headerlink" href="#container-network-configuration" title="Permalink to this headline">¶</a></h2>
+<p>When the bridge configuration is altered the configuration of the container needs to
+be adjusted as well. The following configuration options exist for this:</p>
+<ul class="simple">
+<li><cite>container.network.address</cite>: Address of the container (default: <cite>192.168.250.2</cite>)</li>
+<li><cite>container.network.gateway</cite>: Gateway the container should use (default: <cite>192.168.250.1</cite>)</li>
+<li><cite>container.network.dns</cite>: DNS server the container should use (default: <cite>8.8.8.8</cite>)</li>
+</ul>
+<p>All configuration items can be changed with the <cite>snap</cite> command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap set anbox container.netwokr.address=192.168.250.10
 </pre></div>
 </div>
 </div>
@@ -254,10 +264,10 @@ with the following command:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="software_rendering.html" class="btn btn-neutral float-right" title="Software Rendering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../architecture/runtime_setup.html" class="btn btn-neutral float-right" title="Runtime setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Advanced use" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="software_rendering.html" class="btn btn-neutral" title="Software Rendering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
