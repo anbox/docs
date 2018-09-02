@@ -9,3 +9,4 @@ This section of the documentation details advanced tasks that power users may wa
     
     rootfs_overlay
     software_rendering
+    network_configuration
