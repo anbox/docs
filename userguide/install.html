@@ -84,6 +84,7 @@
               <p class="caption"><span class="caption-text">User Guide</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Install Anbox</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-kernel-modules">Install kernel modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-the-anbox-snap">Install the Anbox snap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#available-snap-channels">Available snap channels</a></li>
 </ul>
@@ -221,11 +222,20 @@ distribution and how to use them.</p>
 <li>Install the Anbox snap</li>
 </ol>
 </div></blockquote>
+<div class="section" id="install-kernel-modules">
+<h2>Install kernel modules<a class="headerlink" href="#install-kernel-modules" title="Permalink to this headline">¶</a></h2>
 <p>To install the necessary kernel modules, please read <a class="reference internal" href="install_kernel_modules.html"><span class="doc">Install Kernel Modules</span></a>.</p>
-<p>The second step will install the Anbox snap from the store and will give you
-everything you need to run the full Anbox experience.</p>
+<p>After correct installation you should have two new nodes in your systems <cite>/dev</cite> directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ ls -1 /dev/{ashmem,binder}
+/dev/ashmem
+/dev/binder
+</pre></div>
+</div>
+</div>
 <div class="section" id="install-the-anbox-snap">
 <h2>Install the Anbox snap<a class="headerlink" href="#install-the-anbox-snap" title="Permalink to this headline">¶</a></h2>
+<p>The second step will install the Anbox snap from the store and will give you
+everything you need to run the full Anbox experience.</p>
 <p>Installing the Anbox snap is very simple:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap install --devmode --beta anbox
 </pre></div>
@@ -295,7 +305,7 @@ $ sudo ppa-purge ppa:morphis/anbox-support
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Anbox Team.
+        &copy; Copyright 2018, Anbox Team
 
     </p>
   </div>
@@ -314,20 +324,14 @@ $ sudo ppa-purge ppa:morphis/anbox-support
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
 
   
 

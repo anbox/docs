@@ -19,14 +19,25 @@ The installation of Anbox consists of two steps.
  1. Install necessary kernel modules
  2. Install the Anbox snap
 
+Install kernel modules
+^^^^^^^^^^^^^^^^^^^^^^
+
 To install the necessary kernel modules, please read :doc:`install_kernel_modules`.
 
-The second step will install the Anbox snap from the store and will give you
-everything you need to run the full Anbox experience.
+After correct installation you should have two new nodes in your systems `/dev` directory:
+
+.. code-block:: text
+
+    $ ls -1 /dev/{ashmem,binder}
+    /dev/ashmem
+    /dev/binder
 
 
 Install the Anbox snap
 ^^^^^^^^^^^^^^^^^^^^^^
+
+The second step will install the Anbox snap from the store and will give you
+everything you need to run the full Anbox experience.
 
 Installing the Anbox snap is very simple:
 
