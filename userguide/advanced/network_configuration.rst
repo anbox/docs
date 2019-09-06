@@ -58,3 +58,49 @@ All configuration items can be changed with the `snap` command:
 .. code-block:: text
 
     $ snap set anbox container.netwokr.address=192.168.250.10
+
+Physical Networking
+-------------
+
+For Testing purposes (NSD/Bonjour...), it may be required to use the real network connection of the host system instead of the bridged one. To activate this feature, set the following snap variable.
+
+* `container.phys.link`: Network interface the container should use (default: not set)
+
+If using a wifi interface can be done like this:
+
+.. code-block:: text
+
+    $ ip a
+    # look for the preferred interface
+    $ snap set anbox container.phys.link=<interface_name>
+    $ snap restart anbox.container-manager
+
+The selected network of your host system does disappear now.
+It will still disappear on every boot now!
+To get the interface back to your host system, shut down the Android container with:
+
+.. code-block:: text
+
+    $ snap restart anbox.container-manager
+
+To disable the feature and get bridged networking back:
+
+.. code-block:: text
+
+    $ snap set anbox container.phys.link!
+    $ snap restart anbox.container-manager
+
+In addition to selection of the interface to connect to, one has to specify
+the WPA driver, that needs to be used. To change the driver, set the following
+variable. 
+
+* `android.wpa.driver`: WPA Driver (default: nl80211 for physical networking)
+
+Currently, one can choose between "wired","nl80211" and "wext".
+Use "wired" for Ethernet connections. "nl80211" is the default value if physical
+networking is enabled.
+
+.. code-block:: text
+
+    $ snap set android.wpa.driver=<driver>
+    $ snap restart anbox.container-manager
