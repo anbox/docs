@@ -18,6 +18,11 @@ specific packaging.
 Install DKMS package from PPA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. note::
+    Starting with Ubuntu 19.04 binder and ashmem are now build with the standard
+    Ubuntu kernel (>= 5.0) and you don't have to install the modules from the PPA
+    anymore.
+
 In order to add the PPA to your Ubuntu system please run the following commands:
 
 .. code-block:: text

@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Runtime setup" href="../../architecture/runtime_setup.html" />
     <link rel="prev" title="Software Rendering" href="software_rendering.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -228,10 +230,10 @@ Anbox is running on is connected to.</p>
 <p>To change the configuration of the bridge the following configuration options exists
 on the snap:</p>
 <ul class="simple">
-<li><cite>bridge.address</cite>: Address of the bridge (default: <cite>192.168.250.1</cite>)</li>
-<li><cite>bridge.netmask</cite>: Netmask of the bridge (default: <cite>255.255.255.0</cite>)</li>
-<li><cite>bridge.network</cite>: Network used by bridge (default: <cite>192.168.250.1/24</cite>)</li>
-<li><cite>bridge.nat.enable</cite>: Enable or disable NAT support on the bridge (default: <cite>true</cite>)</li>
+<li><p><cite>bridge.address</cite>: Address of the bridge (default: <cite>192.168.250.1</cite>)</p></li>
+<li><p><cite>bridge.netmask</cite>: Netmask of the bridge (default: <cite>255.255.255.0</cite>)</p></li>
+<li><p><cite>bridge.network</cite>: Network used by bridge (default: <cite>192.168.250.1/24</cite>)</p></li>
+<li><p><cite>bridge.nat.enable</cite>: Enable or disable NAT support on the bridge (default: <cite>true</cite>)</p></li>
 </ul>
 <p>The values of the configuration items are not validated. If incorrect values are
 supplied the bridge may get incorrectly configured and the container wont be able
@@ -246,9 +248,9 @@ to access any outside network or will fail to start.</p>
 <p>When the bridge configuration is altered the configuration of the container needs to
 be adjusted as well. The following configuration options exist for this:</p>
 <ul class="simple">
-<li><cite>container.network.address</cite>: Address of the container (default: <cite>192.168.250.2</cite>)</li>
-<li><cite>container.network.gateway</cite>: Gateway the container should use (default: <cite>192.168.250.1</cite>)</li>
-<li><cite>container.network.dns</cite>: DNS server the container should use (default: <cite>8.8.8.8</cite>)</li>
+<li><p><cite>container.network.address</cite>: Address of the container (default: <cite>192.168.250.2</cite>)</p></li>
+<li><p><cite>container.network.gateway</cite>: Gateway the container should use (default: <cite>192.168.250.1</cite>)</p></li>
+<li><p><cite>container.network.dns</cite>: DNS server the container should use (default: <cite>8.8.8.8</cite>)</p></li>
 </ul>
 <p>All configuration items can be changed with the <cite>snap</cite> command:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ snap set anbox container.netwokr.address=192.168.250.10
@@ -268,7 +270,7 @@ be adjusted as well. The following configuration options exist for this:</p>
         <a href="../../architecture/runtime_setup.html" class="btn btn-neutral float-right" title="Runtime setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="software_rendering.html" class="btn btn-neutral" title="Software Rendering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="software_rendering.html" class="btn btn-neutral float-left" title="Software Rendering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -294,26 +296,16 @@ be adjusted as well. The following configuration options exist for this:</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
