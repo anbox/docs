@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -229,6 +229,13 @@ anymore.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository ppa:morphis/anbox-support
 $ sudo apt update
 $ sudo apt install linux-headers-generic anbox-modules-dkms
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In case <cite>add-apt-repository</cite> is missing, install it via:</p>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ sudo apt install software-properties-common
 </pre></div>
 </div>
 <p>These will add the PPA to your system and install the <cite>anbox-modules-dkms</cite>

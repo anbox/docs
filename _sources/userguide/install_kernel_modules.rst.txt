@@ -31,6 +31,13 @@ In order to add the PPA to your Ubuntu system please run the following commands:
     $ sudo apt update
     $ sudo apt install linux-headers-generic anbox-modules-dkms
 
+.. note::
+    In case `add-apt-repository` is missing, install it via:
+
+.. code-block:: text
+    
+    $ sudo apt install software-properties-common
+
 These will add the PPA to your system and install the `anbox-modules-dkms`
 package which contains the ashmem and binder kernel modules. They will be
 automatically rebuild every time the kernel packages on your system update.
