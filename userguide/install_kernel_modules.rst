@@ -82,7 +82,7 @@ the following patches, to build them as modules.
 * https://salsa.debian.org/kernel-team/linux/blob/master/debian/patches/debian/export-symbols-needed-by-android-drivers.patch
 
 Debian has enabled these modules since kernel 4.17.3. So you don't need to bother
-how to install. Currently kernel 4.17.3 and above are only available in
-Debian `Unstable <https://packages.debian.org/sid/linux-image-4.17.0-1-amd64>`_.
+how to install. Kernels above 4.17.3 are available in
+Debian `Buster <https://packages.debian.org/buster/kernel-image-4.19.0-17-amd64-di>`_ and later releases of Debian.
 
 Other distributions are welcome to take these patches and enable them by default.
