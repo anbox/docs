@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = u'Anbox'
-copyright = u'2018, Anbox Team'
+copyright = u'2022, Anbox Team'
 author = u'Anbox Team'
 
 # The short X.Y version
