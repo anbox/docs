@@ -14,15 +14,14 @@ If you don't know about snaps yet head over to `snapcraft.io <https://snapcraft.
 to get an introduction of what snaps are, how to install support for them on your
 distribution and how to use them.
 
-The installation of Anbox consists of two steps.
+On recent Ubuntu versions (>= 19.04), Anbox can be installed in just one step using `snap`.
 
- 1. Install necessary kernel modules
- 2. Install the Anbox snap
+On other systems, you may first need to install the following kernel modules.
 
 Install kernel modules
 ^^^^^^^^^^^^^^^^^^^^^^
 
-To install the necessary kernel modules, please read :doc:`install_kernel_modules`.
+Skip this step if you are running on an Ubuntu system >= 19.04. Otherwise, please follow :doc:`install_kernel_modules` to install the necessary kernel modules.
 
 After correct installation you should have two new nodes in your systems `/dev` directory:
 
@@ -36,7 +35,7 @@ After correct installation you should have two new nodes in your systems `/dev` 
 Install the Anbox snap
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The second step will install the Anbox snap from the store and will give you
+This step will install the Anbox snap from the store and will give you
 everything you need to run the full Anbox experience.
 
 Installing the Anbox snap is very simple:
