@@ -57,4 +57,4 @@ All configuration items can be changed with the `snap` command:
 
 .. code-block:: text
 
-    $ snap set anbox container.netwokr.address=192.168.250.10
+    $ snap set anbox container.network.address=192.168.250.10
